@@ -1,0 +1,17 @@
+[Unit]
+Description=openSUSE bind container
+Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-bind-image
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+EnvironmentFile=/etc/sysconfig/container-bind
+ExecStartPre=-/usr/bin/mkdir -p ${CONFIG_DIR}
+ExecStartPre=-/usr/bin/podman stop bind
+ExecStartPre=-/usr/bin/podman rm bind
+ExecStartPre=/usr/bin/podman pull ${BIND_IMAGE_PATH}
+ExecStart=/usr/bin/podman run --rm -v ${CONFIG_DIR}:/data -p 53:53/tcp -p 53:53/udp --name bind ${BIND_IMAGE_PATH}
+ExecStop=/usr/bin/podman stop -t 2 bind
+
+[Install]
+WantedBy=multi-user.target
