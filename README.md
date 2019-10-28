@@ -5,5 +5,5 @@ to run openSUSE container via podman controlled by systemd.
 
 Currently supported are:
   * bind
-  * dhcp
+  * dhcp-server
   * mariadb

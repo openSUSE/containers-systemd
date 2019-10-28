@@ -1,0 +1,26 @@
+## Path:	Container/dhcp-server
+## Description:	Settings for dhcp-server container
+## Type:        number
+## Default:     4
+#
+# IPv4 or IPv6? 4|6
+DHCPD_IP_PROTOCOL=4
+
+## Type:        string
+## Default:     ""
+#
+# List of interfaces to listen on (if0 if1 ... ifN)
+DHCPD_INTERFACES=""
+
+## Type:	string
+## Default:	"registry.opensuse.org/opensuse/dhcp-server:latest"
+#
+# Name of the image path to pull the dhcp-server image from
+DHCPD_IMAGE_PATH=registry.opensuse.org/opensuse/dhcp-server:latest
+
+## Type:        string
+## Default:     "/srv/dhcp-server"
+#
+# Name of the path where the configuration will be stored
+CONFIG_DIR="/srv/dhcp-server"
+
