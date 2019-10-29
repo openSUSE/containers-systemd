@@ -1,5 +1,5 @@
 [Unit]
-Description=openSUSE dhcp4 server container
+Description=openSUSE dhcp6 server container
 Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-dhcp-server-image
 
 [Service]
@@ -10,7 +10,7 @@ ExecStartPre=-/usr/bin/mkdir -p ${CONFIG_DIR}
 ExecStartPre=-/usr/bin/podman stop dhcp-server
 ExecStartPre=-/usr/bin/podman rm dhcp-server
 ExecStartPre=/usr/bin/podman pull ${DHCPD_IMAGE_PATH}
-ExecStart=/usr/bin/podman run --rm -v ${CONFIG_DIR}:/data -p 53:53/tcp -p 53:53/udp --name dhcp-server --env DHCPD_IP_PROTOCOL=4 --env DHCPD_INTERFACES=${DHCPD_INTERFACES} ${DHCPD_IMAGE_PATH}
+ExecStart=/usr/bin/podman run --rm -v ${CONFIG_DIR}:/data -p 53:53/tcp -p 53:53/udp --name dhcp-server --env DHCPD_IP_PROTOCOL=6 --env DHCPD_INTERFACES=${DHCPD_INTERFACES} ${DHCPD_IMAGE_PATH}
 ExecStop=/usr/bin/podman stop -t 2 dhcp-server
 
 [Install]

@@ -1,11 +1,5 @@
 ## Path:	Container/dhcp-server
-## Description:	Settings for dhcp-server container
-## Type:        number
-## Default:     4
-#
-# IPv4 or IPv6? 4|6
-DHCPD_IP_PROTOCOL=4
-
+## Description:	Settings for dhcp-server and dhcp6-server container
 ## Type:        string
 ## Default:     ""
 #
