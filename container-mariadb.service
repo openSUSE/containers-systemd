@@ -1,0 +1,17 @@
+[Unit]
+Description=openSUSE mariadb container
+Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-mariadb-image
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+EnvironmentFile=/etc/sysconfig/container-mariadb
+ExecStartPre=-/usr/bin/mkdir -p ${CONFIG_DIR}
+ExecStartPre=-/usr/bin/podman stop mariadb
+ExecStartPre=-/usr/bin/podman rm mariadb
+ExecStartPre=/usr/bin/podman pull ${MARIADB_IMAGE_PATH}
+ExecStart=/usr/bin/podman run --rm -v ${DATA_DIR}:/var/lib/mysql -p 3306:3306 --name mariadb ${MARIADB_IMAGE_PATH}
+ExecStop=/usr/bin/podman stop -t 2 mariadb
+
+[Install]
+WantedBy=multi-user.target

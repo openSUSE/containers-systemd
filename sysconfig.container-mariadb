@@ -1,0 +1,14 @@
+## Path:	Container/mariadb
+## Description:	Settings for mariadb container
+## Type:	string
+## Default:	"registry.opensuse.org/opensuse/mariadb:latest"
+#
+# Name of the image path to pull the mariadb image from
+MARIADB_IMAGE_PATH=registry.opensuse.org/opensuse/mariadb:latest
+
+## Type:        string
+## Default:     "/srv/mariadb"
+#
+# Name of the path where the configuration will be stored
+DATA_DIR="/srv/mariadb"
+
