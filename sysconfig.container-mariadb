@@ -12,3 +12,12 @@ MARIADB_IMAGE_PATH=registry.opensuse.org/opensuse/mariadb:latest
 # Name of the path where the configuration will be stored
 DATA_DIR="/srv/mariadb"
 
+## Type:        string
+## Default:     "/etc/mariadb-secrets"
+#
+# Name of the path where the files with the passwords for
+# MYSQL_ROOT_PASSWORD, MYSQL_ROOT_HOST, MYSQL_DATABASE, 
+# MYSQL_USER and MYSQL_PASSWORD can be found. The file names
+# needs to be the ones of the variable names and should not
+# be readable for anybody else.
+SECRETS_DIR="/etc/mariadb-secrets"

@@ -6,11 +6,11 @@ Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-
 TimeoutStartSec=0
 Restart=always
 EnvironmentFile=/etc/sysconfig/container-mariadb
-ExecStartPre=-/usr/bin/mkdir -p ${CONFIG_DIR}
+ExecStartPre=-/usr/bin/mkdir -p ${DATA_DIR}
 ExecStartPre=-/usr/bin/podman stop mariadb
 ExecStartPre=-/usr/bin/podman rm mariadb
 ExecStartPre=/usr/bin/podman pull ${MARIADB_IMAGE_PATH}
-ExecStart=/usr/bin/podman run --rm -v ${DATA_DIR}:/var/lib/mysql -p 3306:3306 --name mariadb ${MARIADB_IMAGE_PATH}
+ExecStart=/usr/bin/podman run --rm -v ${DATA_DIR}:/var/lib/mysql -v ${SECRETS_DIR}:/etc/mariadb-secrets -p 3306:3306 --env MYSQL_ROOT_PASSWORD_FILE=/etc/mariadb-secrets/MYSQL_ROOT_PASSWORD --env MYSQL_ROOT_HOST_FILE=/etc/mariadb-secrets/MYSQL_ROOT_HOST --env MYSQL_DATABASE_FILE=/etc/mariadb-secrets/MYSQL_DATABASE --env MYSQL_USER_FILE=/etc/mariadb-secrets/MYSQL_USER --env MYSQL_PASSWORD_FILE=/etc/mariadb-secrets/MYSQL_PASSWORD --name mariadb ${MARIADB_IMAGE_PATH}
 ExecStop=/usr/bin/podman stop -t 2 mariadb
 
 [Install]
