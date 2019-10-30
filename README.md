@@ -20,7 +20,7 @@ Currently supported are:
 ## mariadb
 
   * /etc/sysconfig/container-mariadb contains generic settings
-  * /etc/mariadb-secrets contain files for the first start to setup the mariadb databse. They are only read if mariadb needs to initialize the data the first time. They should not be readable and deleted after the initialization was successfull, so that nobody can steal them.
+  * /etc/mariadb-secrets contain files for the first start to setup the mariadb database and can be changed via SECRETS_DIR in the /etc/sysconfig/container-mariadb file. They are only read if mariadb needs to initialize the data the first time. They should not be readable and deleted after the initialization was successfull, so that nobody can steal them.
     * ${SECRETS_DIR}/MYSQL_ROOT_PASSWORD (required)
     * ${SECRETS_DIR}/MYSQL_ROOT_HOST
     * ${SECRETS_DIR}/MYSQL_DATABASE
