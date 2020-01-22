@@ -8,6 +8,7 @@ Currently supported are:
   * dhcp-server
   * dhcp6-server
   * mariadb
+  * nginx
 
 ## bind
 
@@ -26,3 +27,7 @@ Currently supported are:
     * ${SECRETS_DIR}/MYSQL_DATABASE
     * ${SECRETS_DIR}/MYSQL_USER
     * ${SECRETS_DIR}/MYSQL_PASSWORD
+
+## nginx
+
+  * /etc/sysconfig/container-nginx contains generic settings
