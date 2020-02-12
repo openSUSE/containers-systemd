@@ -1,0 +1,17 @@
+[Unit]
+Description=openSUSE haproxy container
+Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-haproxy-image
+After=network-online.target container-bind.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+EnvironmentFile=/etc/sysconfig/container-haproxy
+ExecStartPre=-/usr/bin/podman stop haproxy
+ExecStartPre=-/usr/bin/podman rm haproxy
+ExecStartPre=-/usr/bin/podman pull ${DHCPD_IMAGE_PATH}
+ExecStart=/usr/bin/podman run --rm -v ${CONFIG_FILE}:/etc/haproxy/haproxy.cfg:ro --net=host --name haproxy ${HAPROXY_IMAGE_PATH}
+ExecStop=/usr/bin/podman stop -t 2 haproxy
+
+[Install]
+WantedBy=multi-user.target

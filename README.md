@@ -7,6 +7,7 @@ Currently supported are:
   * bind
   * dhcp-server
   * dhcp6-server
+  * haproxy
   * mariadb
   * nginx
 
@@ -17,6 +18,10 @@ Currently supported are:
 ## dhcp-server/dhcp6-server
 
   * /etc/sysconfig/container-dhcp contains generic settings for the dhcpd4 and dhcpd6 daemons. It is required to set DHCPD_INTERFACES. During the first start, example ${CONFIG_DIR}/dhcpd.conf or ${CONFIG_DIR}/dhcpd6.conf are created.
+
+## haproxy
+
+  * /etc/sysconfig/container-haproxy contains generic settings
 
 ## mariadb
 
