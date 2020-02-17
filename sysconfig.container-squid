@@ -1,0 +1,17 @@
+## Path:	Container/squid
+## Description:	Settings for squid container
+## Type:	string
+## Default:	"registry.opensuse.org/opensuse/squid:latest"
+#
+# Name of the image path to pull the bind image from
+SQUID_IMAGE_PATH=registry.opensuse.org/opensuse/squid:latest
+
+## Type:        string
+## Default:     "-p 3128:3128"
+#
+# Extra arguments for podman for the squid container
+# Possible additional entries (multiple are possible):
+# "-v /srv/squid/squid.cfg:/etc/squid/squid.cfg:ro"
+# "-v /srv/squid/cache:/var/cache/squid
+PODMAN_SQUID_ARGS="-p 3128:3128"
+

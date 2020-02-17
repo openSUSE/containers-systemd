@@ -1,0 +1,16 @@
+[Unit]
+Description=openSUSE squid container
+Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-squid-image
+After=network-online.target
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+EnvironmentFile=/etc/sysconfig/container-squid
+ExecStartPre=-/usr/bin/podman stop squid
+ExecStartPre=-/usr/bin/podman rm squid
+ExecStartPre=-/usr/bin/podman pull ${SQUID_IMAGE_PATH}
+ExecStart=/bin/sh -c "/usr/bin/podman run --rm ${PODMAN_SQUID_ARGS} --name squid ${SQUID_IMAGE_PATH}"
+
+[Install]
+WantedBy=multi-user.target

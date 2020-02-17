@@ -10,6 +10,7 @@ Currently supported are:
   * haproxy
   * mariadb
   * nginx
+  * squid
 
 ## bind
 
@@ -36,3 +37,8 @@ Currently supported are:
 ## nginx
 
   * /etc/sysconfig/container-nginx contains generic settings
+
+## squid
+
+ * /etc/sysconfig/container-squid contains generic settings
+
