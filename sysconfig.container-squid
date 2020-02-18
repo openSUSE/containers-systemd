@@ -12,6 +12,6 @@ SQUID_IMAGE_PATH=registry.opensuse.org/opensuse/squid:latest
 # Extra arguments for podman for the squid container
 # Possible additional entries (multiple are possible):
 # "-v /srv/squid/squid.cfg:/etc/squid/squid.cfg:ro"
-# "-v /srv/squid/cache:/var/cache/squid
+# "-v /srv/squid/cache:/var/cache/squid"
 PODMAN_SQUID_ARGS="-p 3128:3128"
 
