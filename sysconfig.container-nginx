@@ -4,11 +4,18 @@
 ## Default:	"registry.opensuse.org/opensuse/nginx:latest"
 #
 # Name of the image path to pull the nginx image from
-BIND_IMAGE_PATH=registry.opensuse.org/opensuse/nginxlatest
+NGINX_IMAGE_PATH=registry.opensuse.org/opensuse/nginx:latest
 
 ## Type:        string
-## Default:     "/srv/nginx"
+## Default:     "/srv/nginx/etc"
 #
-# Name of the path where the configuration and web pages will be stored
-CONFIG_DIR="/srv/nginx"
+# Name of the path where the configuration is stored
+NGINX_CFG="/srv/nginx/etc"
+
+
+## Type:        string
+## Default:     "/srv/nginx/htdocs"
+#
+# Name of the path where the web pages are stored
+HTDOCS_DIR="/srv/nginx/htdocs"
 
