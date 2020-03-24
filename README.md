@@ -12,6 +12,9 @@ Currently supported are:
   * nginx
   * squid
 
+Additional, there is the `container-image-prune.timer` to cleanup
+unnamed images once a day. 
+
 ## bind
 
   * /etc/sysconfig/container-bind contains generic settings

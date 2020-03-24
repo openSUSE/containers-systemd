@@ -1,0 +1,7 @@
+[Unit]
+Description=Removes all unnamed images from local storage
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/podman image prune -f
