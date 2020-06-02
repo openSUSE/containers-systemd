@@ -1,21 +1,12 @@
-## Path:	Container/nginx
-## Description:	Settings for nginx container
-## Type:	string
-## Default:	"registry.opensuse.org/opensuse/nginx:latest"
-#
+# Variables of this file can be overwritten with
+# /etc/default/container-nginx
+
 # Name of the image path to pull the nginx image from
 NGINX_IMAGE_PATH=registry.opensuse.org/opensuse/nginx:latest
 
-## Type:        string
-## Default:     "/srv/nginx/etc"
-#
 # Name of the path where the configuration is stored
 NGINX_CFG="/srv/nginx/etc"
 
 
-## Type:        string
-## Default:     "/srv/nginx/htdocs"
-#
 # Name of the path where the web pages are stored
 HTDOCS_DIR="/srv/nginx/htdocs"
-

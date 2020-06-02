@@ -4,15 +4,18 @@ Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-
 After=network-online.target
 
 [Service]
-TimeoutStartSec=0
-Restart=always
-EnvironmentFile=/etc/sysconfig/container-dhcp-server
+Restart=on-failure
+EnvironmentFile=/usr/etc/default/container-dhcp-server
+EnvironmentFile=-/etc/default/container-dhcp-server
 ExecStartPre=-/usr/bin/mkdir -p ${CONFIG_DIR}
 ExecStartPre=-/usr/bin/podman stop dhcp-server
 ExecStartPre=-/usr/bin/podman rm dhcp-server
 ExecStartPre=-/usr/bin/podman pull ${DHCPD_IMAGE_PATH}
-ExecStart=/usr/bin/podman run --rm -v ${CONFIG_DIR}:/data --net=host --name dhcp-server --env DHCPD_IP_PROTOCOL=4 --env DHCPD_INTERFACES=${DHCPD_INTERFACES} ${DHCPD_IMAGE_PATH}
-ExecStop=/usr/bin/podman stop -t 2 dhcp-server
+ExecStart=/usr/bin/podman run -d --conmon-pidfile /%t/%n-pid --rm -v ${CONFIG_DIR}:/data --net=host --name dhcp-server --env DHCPD_IP_PROTOCOL=4 --env DHCPD_INTERFACES=${DHCPD_INTERFACES} ${DHCPD_IMAGE_PATH}
+ExecStop=/usr/bin/podman stop dhcp-server
+KillMode=none
+Type=forking
+PIDFile=/%t/%n-pid
 
 [Install]
 WantedBy=multi-user.target

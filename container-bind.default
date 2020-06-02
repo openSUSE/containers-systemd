@@ -1,0 +1,9 @@
+# Variables of this file can be overwritten with
+# /etc/default/container-bind
+
+# Name of the image path to pull the bind image from
+BIND_IMAGE_PATH=registry.opensuse.org/opensuse/bind:latest
+
+# Name of the path where the configuration will be stored
+CONFIG_DIR="/srv/bind"
+

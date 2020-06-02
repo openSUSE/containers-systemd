@@ -1,0 +1,9 @@
+# Variables of this file can be overwritten with
+# /etc/default/container-haproxy
+
+# Name of the image path to pull the bind image from
+HAPROXY_IMAGE_PATH=registry.opensuse.org/opensuse/haproxy:latest
+
+# Name of the haproxy configuration file
+CONFIG_FILE="/srv/haproxy/haproxy.cfg"
+

@@ -1,20 +1,12 @@
-## Path:	Container/dhcp-server
-## Description:	Settings for dhcp-server and dhcp6-server container
-## Type:        string
-## Default:     ""
-#
+# Variables of this file can be overwritten with
+# /etc/default/container-dhcp-server
+
 # List of interfaces to listen on (if0 if1 ... ifN)
 DHCPD_INTERFACES=""
 
-## Type:	string
-## Default:	"registry.opensuse.org/opensuse/dhcp-server:latest"
-#
 # Name of the image path to pull the dhcp-server image from
 DHCPD_IMAGE_PATH=registry.opensuse.org/opensuse/dhcp-server:latest
 
-## Type:        string
-## Default:     "/srv/dhcp-server"
-#
 # Name of the path where the configuration will be stored
 CONFIG_DIR="/srv/dhcp-server"
 
