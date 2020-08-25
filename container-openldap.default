@@ -19,3 +19,7 @@ LDAP_CERTS_DIR="/srv/openldap/certs"
 # names needs to be the ones of the variable names and should not
 # be readable for anybody else.
 SECRETS_DIR="/etc/openldap-secrets"
+
+# Extra arguments for podman to start the container
+# This can e.g. be the hostname: "--hostname <host.domain>"
+PODMAN_EXTRA_ARGS=""
