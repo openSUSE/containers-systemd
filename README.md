@@ -55,6 +55,11 @@ unnamed images once a day.
     * ${SECRETS_DIR}/LDAP_ADMIN_PASSWORD (required)
     * ${SECRETS_DIR}/LDAP_CONFIG_PASSWORD (required)
 
+## postfix
+
+  * /usr/etc/default/container-postfix contains generic settings
+  * /etc/default/container-postfix is for the admin to overwrite them
+
 ## squid
 
   * /usr/etc/default/container-squid contains generic settings

@@ -1,0 +1,22 @@
+[Unit]
+Description=openSUSE postfix container
+Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-postfix-image
+After=network-online.target
+After=container-openldap.service
+
+[Service]
+Restart=on-failure
+EnvironmentFile=/usr/etc/default/container-postfix
+EnvironmentFile=-/etc/default/container-postfix
+ExecStartPre=-/usr/bin/mkdir -p ${POSTFIX_SPOOL_DIR} ${POSTFIX_VMAIL_DIR}
+ExecStartPre=-/usr/bin/podman stop postfix
+ExecStartPre=-/usr/bin/podman rm postfix
+ExecStartPre=-/usr/bin/podman pull ${POSTFIX_IMAGE_PATH}
+ExecStart=/bin/sh -c "/usr/bin/podman run -d --conmon-pidfile /%t/%n-pid --rm ${PODMAN_EXTRA_ARGS} -v ${POSTFIX_SPOOL_DIR}:/var/spool/postfix:Z -v ${VMAIL_SPOOL_DIR}:/var/spool/vmail:z -v ${SECRETS_DIR}:/etc/postfix-secrets:Z -p 25:25 -p 587:587 -e SERVER_HOSTNAME=${SERVER_HOSTNAME} -e SERVER_DOMAIN=${SERVER_DOMAIN} -e SMTP_RELAYHOST=${SMTP_RELAYHOST} -e SMTP_USERNAME=${SMTP_USERNAME} -e SMTP_PASSWORD_FILE=/etc/postfix-secrets/SMTP_PASSWORD -e SMTP_NETWORKS=${SMTP_NETWORKS} -e MASQUERADE_DOMAINS=${MASQUERADE_DOMAINS} -e MYDESTINATION=${MYDESTINATION} -e VIRTUAL_MBOX=${VIRTUAL_MBOX} -e VMAIL_UID=${VMAIL_UID} -e VIRTUAL_DOMAINS=${VIRTUAL_DOMAINS} -e VIRTUAL_USERS=${VIRTUAL_USERS} -e USE_LDAP=${USE_LDAP} -e LDAP_BASE_DN=${LDAP_BASE_DN} -e LDAP_SERVER_URL=${LDAP_SERVER_URL} -e LDAP_MAIL_READER_PASSWORD_FILE=/etc/postfix-secrets/LDAP_MAIL_READER_PASSWORD -e LDAP_USE_TLS=${LDAP_USE_TLS} -e LDAP_TLS_CA_CRT=${LDAP_TLS_CA_CRT} -e TZ=${TZ} -e DEBUG=${DEBUG} --name postfix ${POSTFIX_IMAGE_PATH}"
+ExecStop=/usr/bin/podman stop postfix
+KillMode=none
+Type=forking
+PIDFile=/%t/%n-pid
+
+[Install]
+WantedBy=multi-user.target
