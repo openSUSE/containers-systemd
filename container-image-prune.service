@@ -1,6 +1,7 @@
 [Unit]
 Description=Removes all unnamed images from local storage
 After=local-fs.target
+Wants=local-fs.target
 
 [Service]
 Type=oneshot

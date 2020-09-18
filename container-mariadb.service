@@ -2,6 +2,7 @@
 Description=openSUSE mariadb container
 Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-mariadb-image
 After=network-online.target
+Wants=network-online.target
 
 [Service]
 Restart=on-failure
