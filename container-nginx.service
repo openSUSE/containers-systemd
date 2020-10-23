@@ -1,6 +1,6 @@
 [Unit]
 Description=openSUSE nginx container
-Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-nginx-image
+Documentation=https://en.opensuse.org/Portal:Container/Image/nginx
 After=network-online.target
 Wants=network-online.target
 

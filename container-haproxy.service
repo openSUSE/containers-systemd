@@ -1,6 +1,6 @@
 [Unit]
 Description=openSUSE haproxy container
-Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-haproxy-image
+Documentation=https://en.opensuse.org/Portal:Container/Image/haproxy
 After=network-online.target container-bind.service
 Wants=network-online.target
 

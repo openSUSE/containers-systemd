@@ -1,6 +1,6 @@
 [Unit]
 Description=openSUSE dhcp4 server container
-Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-dhcp-server-image
+Documentation=https://en.opensuse.org/Portal:Container/Image/dhcp-server
 After=network-online.target
 Wants=network-online.target
 
