@@ -1,7 +1,7 @@
 [Unit]
 Description=openSUSE postfix container
 Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-postfix-image
-After=network-online.target container-openldap.service
+After=network-online.target container-openldap.service local-fs.target firewalld.service
 Wants=network-online.target container-openldap.service
 
 [Service]

@@ -1,7 +1,7 @@
 [Unit]
 Description=openSUSE OpenLDAP container
 Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-openldap-image
-After=network-online.target
+After=network-online.target local-fs.target firewalld.service
 Wants=network-online.target
 
 [Service]
@@ -12,7 +12,7 @@ ExecStartPre=-/usr/bin/mkdir -p ${LDAP_DB_DIR} ${LDAP_ETC_DIR} ${LDAP_CERTS_DIR}
 ExecStartPre=-/usr/bin/podman stop openldap
 ExecStartPre=-/usr/bin/podman rm openldap
 ExecStartPre=-/usr/bin/podman pull ${OPENLDAP_IMAGE_PATH}
-ExecStart=/bin/sh -c "/usr/bin/podman run -d --conmon-pidfile /%t/%n-pid --rm ${PODMAN_EXTRA_ARGS} -v ${LDAP_DB_DIR}:/var/lib/ldap:Z -v ${LDAP_ETC_DIR}:/etc/openldap/slapd.d:Z -v ${SECRETS_DIR}:/etc/openldap-secrets:Z -v ${LDAP_CERTS_DIR}:/etc/openldap/certs:z -p 389:389 -p 636:636 --env LDAP_ADMIN_PASSWORD_FILE=/etc/openldap-secrets/LDAP_ADMIN_PASSWORD --env LDAP_CONFIG_PASSWORD_FILE=/etc/openldap-secrets/LDAP_CONFIG_PASSWORD -e LDAP_DOMAIN=${LDAP_DOMAIN} -e LDAP_BASE_DN=${LDAP_BASE_DN} -e LDAP_ORGANIZATION=${LDAP_ORGANIZATION} -e LDAP_SEED_LDIF_PATH=${LDAP_SEED_LDIF_PATH} -e LDAP_SEED_SCHEMA_PATH=${LDAP_SEED_SCHEMA_PATH} -e LDAP_TLS=${LDAP_TLS} -e LDAP_TLS_CA_CRT=${LDAP_TLS_CA_CRT} -e LDAP_TLS_CA_KEY=${LDAP_TLS_CA_KEY} -e LDAP_TLS_CRT=${LDAP_TLS_CRT} -e LDAP_TLS_KEY=${LDAP_TLS_KEY} -e LDAP_TLS_ENFORCE=${LDAP_TLS_ENFORCE} -e LDAP_TLS_VERIFY_CLIENT=${LDAP_TLS_VERIFY_CLIENT} -e LDAP_NOFILE=${LDAP_NOFILE} -e LDAP_UID=${LDAP_UID} -e LDAP_GID=${LDAP_GID} -e SLAPD_LOG_LEVEL=${SLAPD_LOG_LEVEL} -e DEBUG=${DEBUG} --name openldap ${OPENLDAP_IMAGE_PATH}"
+ExecStart=/bin/sh -c "/usr/bin/podman run -d --conmon-pidfile /%t/%n-pid --rm ${PODMAN_EXTRA_ARGS} -v ${LDAP_DB_DIR}:/var/lib/ldap:Z -v ${LDAP_ETC_DIR}:/etc/openldap/slapd.d:Z -v ${SECRETS_DIR}:/etc/openldap-secrets:Z -v ${LDAP_CERTS_DIR}:/etc/openldap/certs:z -p 389:389 -p 636:636 -e LDAP_ADMIN_PASSWORD_FILE=/etc/openldap-secrets/LDAP_ADMIN_PASSWORD -e LDAP_CONFIG_PASSWORD_FILE=/etc/openldap-secrets/LDAP_CONFIG_PASSWORD -e MAIL_ACCOUNT_READER_PASSWORD_FILE=/etc/openldap-secrets/MAIL_ACCOUNT_READER_PASSWORD -e LDAP_DOMAIN=${LDAP_DOMAIN} -e LDAP_BASE_DN=${LDAP_BASE_DN} -e LDAP_ORGANIZATION=${LDAP_ORGANIZATION} -e LDAP_SEED_LDIF_PATH=${LDAP_SEED_LDIF_PATH} -e LDAP_SEED_SCHEMA_PATH=${LDAP_SEED_SCHEMA_PATH} -e LDAP_TLS=${LDAP_TLS} -e LDAP_TLS_CA_CRT=${LDAP_TLS_CA_CRT} -e LDAP_TLS_CA_KEY=${LDAP_TLS_CA_KEY} -e LDAP_TLS_CRT=${LDAP_TLS_CRT} -e LDAP_TLS_KEY=${LDAP_TLS_KEY} -e LDAP_TLS_ENFORCE=${LDAP_TLS_ENFORCE} -e LDAP_TLS_VERIFY_CLIENT=${LDAP_TLS_VERIFY_CLIENT} -e LDAP_NOFILE=${LDAP_NOFILE} -e LDAP_UID=${LDAP_UID} -e LDAP_GID=${LDAP_GID} -e SLAPD_LOG_LEVEL=${SLAPD_LOG_LEVEL} -e SETUP_FOR_MAILSERVER=${SETUP_FOR_MAILSERVER} -e DEBUG=${DEBUG} --name openldap ${OPENLDAP_IMAGE_PATH}"
 ExecStop=/usr/bin/podman stop openldap
 KillMode=none
 Type=forking

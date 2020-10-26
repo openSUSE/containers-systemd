@@ -1,7 +1,7 @@
 [Unit]
 Description=openSUSE bind container
 Documentation=https://en.opensuse.org/Portal:Container/Image/bind
-After=network-online.target
+After=network-online.target local-fs.target firewalld.service
 Wants=network-online.target
 
 [Service]
