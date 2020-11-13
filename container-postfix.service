@@ -5,7 +5,7 @@ After=network-online.target container-openldap.service local-fs.target firewalld
 Wants=network-online.target container-openldap.service
 
 [Service]
-Restart=on-failure
+Restart=on-abnormal
 EnvironmentFile=/usr/etc/default/container-postfix
 EnvironmentFile=-/etc/default/container-postfix
 ExecStartPre=-/usr/bin/mkdir -p ${POSTFIX_SPOOL_DIR} ${POSTFIX_VMAIL_DIR} ${EXTRA_PKI_DIR}

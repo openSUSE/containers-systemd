@@ -5,7 +5,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-Restart=on-failure
+Restart=on-abnormal
 EnvironmentFile=/usr/etc/default/container-dhcp-server
 EnvironmentFile=-/etc/default/container-dhcp-server
 ExecStartPre=-/usr/bin/mkdir -p ${CONFIG_DIR}
