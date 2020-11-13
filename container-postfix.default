@@ -21,8 +21,13 @@ EXTRA_PKI_DIR="/srv/postfix/pki"
 # Name of the path where the files with the passwords for
 # LDAP_ADMIN_PASSWORD and LDAP_CONFIG_PASSWORD can be found. The file
 # names needs to be the ones of the variable names and should not
-# be readable for anybody else.
+# be readable for anybody else. This directory is mounted as volume
+# to "/etc/postfix-secrets" inside the container.
 SECRETS_DIR="/etc/postfix-secrets"
+
+# Location of the file with the password to authenticate to
+# a mail server.
+SMTP_PASSWORD_FILE="/etc/postfix-secrets/SMTP_PASSWORD"
 
 # Extra arguments for podman to start the container
 PODMAN_EXTRA_ARGS=""
@@ -38,3 +43,7 @@ USE_LDAP=0
 
 # If we use LDAP, use a TLS secured connection
 LDAP_USE_TLS=1
+
+# Location of the file with the password to authenticate a bind
+# with the bind_dn distinguished name.
+LDAP_BIND_PASSWORD_FILE="/etc/postfix-secrets/LDAP_BIND_PASSWORD"
