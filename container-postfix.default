@@ -29,6 +29,9 @@ SECRETS_DIR="/etc/postfix-secrets"
 # a mail server.
 SMTP_PASSWORD_FILE="/etc/postfix-secrets/SMTP_PASSWORD"
 
+# Ports which needs to be exported
+POSTFIX_PORTS="-p 25:25 -p 587:587"
+
 # Extra arguments for podman to start the container
 PODMAN_EXTRA_ARGS=""
 
