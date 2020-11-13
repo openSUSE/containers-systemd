@@ -5,7 +5,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-Restart=on-failure
+Restart=on-abnormal
 EnvironmentFile=/usr/etc/default/container-squid
 EnvironmentFile=-/etc/default/container-squid
 ExecStartPre=-/usr/bin/podman stop squid

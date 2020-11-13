@@ -5,7 +5,7 @@ After=network-online.target local-fs.target firewalld.service
 Wants=network-online.target
 
 [Service]
-Restart=on-failure
+Restart=on-abnormal
 EnvironmentFile=/usr/etc/default/container-openldap
 EnvironmentFile=-/etc/default/container-openldap
 ExecStartPre=-/usr/bin/mkdir -p ${LDAP_DB_DIR} ${LDAP_ETC_DIR} ${LDAP_CERTS_DIR}

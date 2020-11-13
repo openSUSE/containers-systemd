@@ -5,7 +5,7 @@ After=network-online.target container-bind.service
 Wants=network-online.target
 
 [Service]
-Restart=on-failure
+Restart=on-abnormal
 EnvironmentFile=/usr/etc/default/container-haproxy
 EnvironmentFile=-/etc/default/container-haproxy
 ExecStartPre=-/usr/bin/podman stop haproxy

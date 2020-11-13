@@ -5,7 +5,7 @@ After=network-online.target local-fs.target firewalld.service
 Wants=network-online.target
 
 [Service]
-Restart=on-failure
+Restart=on-abnormal
 EnvironmentFile=/usr/etc/default/container-mariadb
 EnvironmentFile=-/etc/default/container-mariadb
 ExecStartPre=-/usr/bin/mkdir -p ${DATA_DIR}
