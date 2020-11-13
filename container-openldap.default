@@ -17,8 +17,18 @@ LDAP_CERTS_DIR="/srv/openldap/certs"
 # Name of the path where the files with the passwords for
 # LDAP_ADMIN_PASSWORD and LDAP_CONFIG_PASSWORD can be found. The file
 # names needs to be the ones of the variable names and should not
-# be readable for anybody else.
+# be readable for anybody else. It will be mounted to
+# "/etc/openldap-secrets" inside the container.
 SECRETS_DIR="/etc/openldap-secrets"
+
+# Locations of the files with the passwords for the admin, config
+# and mail account reader users.
+LDAP_ADMIN_PASSWORD_FILE=/etc/openldap-secrets/LDAP_ADMIN_PASSWORD
+LDAP_CONFIG_PASSWORD_FILE=/etc/openldap-secrets/LDAP_CONFIG_PASSWORD
+MAIL_ACCOUNT_READER_PASSWORD_FILE=/etc/openldap-secrets/MAIL_ACCOUNT_READER_PASSWORD
+
+# Ports which needs to be exported
+LDAP_PORTS="-p 389:389 -p 636:636"
 
 # Extra arguments for podman to start the container
 # This can e.g. be the hostname: "--hostname <host.domain>"
