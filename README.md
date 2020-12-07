@@ -9,8 +9,10 @@ Currently supported are:
   * dhcp6-server
   * haproxy
   * mariadb
+  * minidlna
   * nginx
   * openldap
+  * postfix
   * squid
 
 Additional, there is the `container-image-prune.timer` to cleanup
@@ -41,6 +43,11 @@ unnamed images once a day.
     * ${SECRETS_DIR}/MYSQL_DATABASE
     * ${SECRETS_DIR}/MYSQL_USER
     * ${SECRETS_DIR}/MYSQL_PASSWORD
+
+## minidlna
+
+  * /usr/etc/default/container-minidlna contains generic settings
+  * /etc/default/container-minidlna is for the admin to overwrite them
 
 ## nginx
 

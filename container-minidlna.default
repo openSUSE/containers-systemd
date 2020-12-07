@@ -1,0 +1,27 @@
+# Variables of this file can be overwritten with
+# /etc/default/container-minidlna
+
+# Name of the image path to pull the openldap image from
+MINIDLNA_IMAGE_PATH=registry.opensuse.org/opensuse/minidlna:latest
+
+# Name of the path where the multimedia files can be found
+# Will be mounted into the container as /media
+MEDIA_DIR="/srv/minidlna"
+
+# Network or ports which needs to be exported
+MINIDLNA_NET="--net=host"
+
+# Environment variables to configure minidlna
+# Any configuration directive of minidlna can be prefixed with MINIDLNA_
+# e.g.
+# MINIDLNA_MEDIA_DIR=/media
+# MINIDLNA_MEDIA_DIR_1=A,/media/audio
+# MINIDLNA_MEDIA_DIR_2=V,/media/video
+# MINIDLNA_FRIENDLY_NAME="My DNLA Server"
+MINIDLNA_ENV="-e MINIDLNA_MEDIA_DIR=/media"
+
+# Additional arguments for minidlna, e.g. "-d" for debugging
+MINIDLNA_OPTS=""
+
+# Extra arguments for podman to start the container
+PODMAN_EXTRA_ARGS=""

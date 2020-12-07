@@ -1,0 +1,22 @@
+[Unit]
+Description=openSUSE MiniDLNA container
+Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-minidlna-image
+After=network-online.target local-fs.target firewalld.service
+Wants=network-online.target
+
+[Service]
+Restart=on-abnormal
+EnvironmentFile=/usr/etc/default/container-minidlna
+EnvironmentFile=-/etc/default/container-minidlna
+ExecStartPre=-/usr/bin/mkdir -p ${MEDIA_DIR}
+ExecStartPre=-/usr/bin/podman stop minidlna
+ExecStartPre=-/usr/bin/podman rm minidlna
+ExecStartPre=-/usr/bin/podman pull ${MINIDLNA_IMAGE_PATH}
+ExecStart=/bin/sh -c "/usr/bin/podman run -d --conmon-pidfile /%t/%n-pid --rm ${PODMAN_EXTRA_ARGS} ${MINIDLNA_NET} -v ${MEDIA_DIR}:/media:Z ${MINIDLNA_ENV} -e DEBUG=${DEBUG} --name minidlna ${MINIDLNA_IMAGE_PATH} ${MINIDLNA_OPTS}"
+ExecStop=/usr/bin/podman stop minidlna
+KillMode=none
+Type=forking
+PIDFile=/%t/%n-pid
+
+[Install]
+WantedBy=multi-user.target
