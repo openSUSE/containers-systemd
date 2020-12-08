@@ -7,6 +7,7 @@ Currently supported are:
   * bind
   * dhcp-server
   * dhcp6-server
+  * dovecot
   * haproxy
   * mariadb
   * minidlna
@@ -27,6 +28,11 @@ unnamed images once a day.
 
   * /usr/etc/default/container-dhcp contains generic settings for the dhcpd4 and dhcpd6 daemons. It is required to set DHCPD_INTERFACES. During the first start, example ${CONFIG_DIR}/dhcpd.conf or ${CONFIG_DIR}/dhcpd6.conf are created.
   * /etc/default/container-dhcp is for the admin to overwrite them
+
+## dovecot
+
+  * /usr/etc/default/container-dovecot contains generic settings
+  * /etc/default/container-dovecot is for the admin to overwrite them
 
 ## haproxy
 
