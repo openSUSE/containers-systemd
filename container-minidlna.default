@@ -1,7 +1,7 @@
 # Variables of this file can be overwritten with
 # /etc/default/container-minidlna
 
-# Name of the image path to pull the openldap image from
+# Name of the image path to pull the minidlna image from
 MINIDLNA_IMAGE_PATH=registry.opensuse.org/opensuse/minidlna:latest
 
 # Name of the path where the multimedia files can be found
