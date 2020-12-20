@@ -14,6 +14,7 @@ Currently supported are:
   * nginx
   * openldap
   * postfix
+  * spamassassin
   * squid
 
 Additional, there is the `container-image-prune.timer` to cleanup
@@ -72,6 +73,11 @@ unnamed images once a day.
 
   * /usr/etc/default/container-postfix contains generic settings
   * /etc/default/container-postfix is for the admin to overwrite them
+
+## spamassassin
+
+  * /usr/etc/default/container-spamassassin contains generic settings
+  * /etc/default/container-spamassassin is for the admin to overwrite them
 
 ## squid
 
