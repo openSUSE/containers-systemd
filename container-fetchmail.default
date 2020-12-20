@@ -4,6 +4,9 @@
 # Name of the image path to pull the fetchmail image from
 FETCHMAIL_IMAGE_PATH=registry.opensuse.org/opensuse/fetchmail:latest
 
+# fetchmail configuration file
+FETCHMAILRC="/etc/fetchmailrc"
+
 # Intervall in which to poll for new mails
 POLLING_INTERVAL="600"
 
