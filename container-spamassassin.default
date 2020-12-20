@@ -1,0 +1,8 @@
+# Variables of this file can be overwritten with
+# /etc/default/container-spamassassin
+
+# Name of the image path to pull the spamassassin image from
+SPAMASSASSIN_IMAGE_PATH=registry.opensuse.org/opensuse/spamassassin:latest
+
+# Extra arguments for podman to start the container
+PODMAN_EXTRA_ARGS=""
