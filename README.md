@@ -8,6 +8,7 @@ Currently supported are:
   * dhcp-server
   * dhcp6-server
   * dovecot
+  * fetchmail
   * haproxy
   * mariadb
   * minidlna
@@ -34,6 +35,11 @@ unnamed images once a day.
 
   * /usr/etc/default/container-dovecot contains generic settings
   * /etc/default/container-dovecot is for the admin to overwrite them
+
+## fetchmail
+
+  * /usr/etc/default/container-fetchmail contains generic settings
+  * /etc/default/container-fetchmail is for the admin to overwrite them
 
 ## haproxy
 

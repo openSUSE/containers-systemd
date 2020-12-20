@@ -1,0 +1,21 @@
+[Unit]
+Description=openSUSE fetchmail container
+Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-fetchmail-image
+After=network-online.target local-fs.target firewalld.service
+Wants=network-online.target
+
+[Service]
+Restart=on-abnormal
+EnvironmentFile=/usr/etc/default/container-fetchmail
+EnvironmentFile=-/etc/default/container-fetchmail
+ExecStartPre=-/usr/bin/podman stop fetchmail
+ExecStartPre=-/usr/bin/podman rm fetchmail
+ExecStartPre=-/usr/bin/podman pull ${FETCHMAIL_IMAGE_PATH}
+ExecStart=/bin/sh -c "/usr/bin/podman run -d --conmon-pidfile /%t/%n-pid --rm ${PODMAN_EXTRA_ARGS} -v ${FETCHMAILRC}:/etc/fetchmailrc:ro -e POLLING_INTERVAL=${POLLING_INTERVAL} -e FETCHALL=${FETCHALL} -e SILENT=${SILENT} -e SMTP_HOSTS=${SMTP_HOSTS} -e DEBUG=${DEBUG} -e TZ=${TZ} --name fetchmail ${FETCHMAIL_IMAGE_PATH}"
+ExecStop=/usr/bin/podman stop fetchmail
+KillMode=none
+Type=forking
+PIDFile=/%t/%n-pid
+
+[Install]
+WantedBy=multi-user.target

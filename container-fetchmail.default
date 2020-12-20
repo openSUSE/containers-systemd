@@ -1,0 +1,14 @@
+# Variables of this file can be overwritten with
+# /etc/default/container-fetchmail
+
+# Name of the image path to pull the fetchmail image from
+FETCHMAIL_IMAGE_PATH=registry.opensuse.org/opensuse/fetchmail:latest
+
+# Intervall in which to poll for new mails
+POLLING_INTERVAL="600"
+
+# Comma seprated list of hosts to forward mail to
+SMTP_HOSTS=""
+
+# Extra arguments for podman to start the container
+PODMAN_EXTRA_ARGS=""
