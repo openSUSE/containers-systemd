@@ -4,5 +4,8 @@
 # Name of the image path to pull the spamassassin image from
 SPAMASSASSIN_IMAGE_PATH=registry.opensuse.org/opensuse/spamassassin:latest
 
+# Directory containing additional configuration files
+CONFIG_DIR="/srv/spamassassin/etc"
+
 # Extra arguments for podman to start the container
 PODMAN_EXTRA_ARGS=""

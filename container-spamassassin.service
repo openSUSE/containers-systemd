@@ -8,10 +8,11 @@ Wants=network-online.target
 Restart=on-abnormal
 EnvironmentFile=/usr/etc/default/container-spamassassin
 EnvironmentFile=-/etc/default/container-spamassassin
+ExecStartPre=-/usr/bin/mkdir -p ${CONFIG_DIR}
 ExecStartPre=-/usr/bin/podman stop spamassassin
 ExecStartPre=-/usr/bin/podman rm spamassassin
 ExecStartPre=-/usr/bin/podman pull ${SPAMASSASSIN_IMAGE_PATH}
-ExecStart=/bin/sh -c "/usr/bin/podman run -d --conmon-pidfile /%t/%n-pid --rm ${PODMAN_EXTRA_ARGS} -p 783:783 -e DEBUG=${DEBUG} -e TZ=${TZ} --name spamassassin ${SPAMASSASSIN_IMAGE_PATH}"
+ExecStart=/bin/sh -c "/usr/bin/podman run -d --conmon-pidfile /%t/%n-pid --rm ${PODMAN_EXTRA_ARGS} -p 783:783 -v ${CONFIG_DIR}:/etc/spamassassin -e DEBUG=${DEBUG} -e TZ=${TZ} --name spamassassin ${SPAMASSASSIN_IMAGE_PATH}"
 ExecStop=/usr/bin/podman stop spamassassin
 KillMode=none
 Type=forking
