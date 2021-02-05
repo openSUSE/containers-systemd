@@ -1,0 +1,15 @@
+# Variables of this file can be overwritten with
+# /etc/default/container-nfs-server
+
+# Name of the image path to pull the nfs-server image from
+NFS_SERVER_IMAGE_PATH=registry.opensuse.org/opensuse/nfs-server:latest
+
+# /etc/exports file to be used in the container
+EXPORTS_FILE="/etc/exports"
+
+# Directory which should be exported via NFS. Additional directories
+# could be added as PODMAN_EXTRA_ARGS.
+EXPORTS_DIR="/exports"
+
+# Extra arguments for podman to start the container
+PODMAN_EXTRA_ARGS=""

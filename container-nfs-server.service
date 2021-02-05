@@ -1,0 +1,21 @@
+[Unit]
+Description=openSUSE NFS Server container
+Documentation=https://build.opensuse.org/package/show/openSUSE:Factory/opensuse-nfs-server-image
+After=network-online.target local-fs.target firewalld.service
+Wants=network-online.target
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Restart=on-abnormal
+EnvironmentFile=/usr/etc/default/container-nfs-server
+EnvironmentFile=-/etc/default/container-nfs-server
+ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
+ExecStart=/bin/sh -c "/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --replace -d --rm ${PODMAN_EXTRA_ARGS} -p 2049:2049 --privileged -v ${EXPORTS_FILE}:/etc/exports -v ${EXPORTS_DIR}:${EXPORTS_DIR} --name nfs-server ${NFS_SERVER_IMAGE_PATH}"
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n.ctr-id -t 10
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n.ctr-id
+KillMode=none
+Type=forking
+PIDFile=%t/%n.pid
+
+[Install]
+WantedBy=multi-user.target
