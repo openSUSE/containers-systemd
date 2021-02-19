@@ -7,3 +7,5 @@ BIND_IMAGE_PATH=registry.opensuse.org/opensuse/bind:latest
 # Name of the path where the configuration will be stored
 CONFIG_DIR="/srv/bind"
 
+# Ports which bind should use
+BIND_PORTS="-p 53:53/tcp -p 53:53/udp"
