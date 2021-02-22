@@ -9,7 +9,7 @@ Environment=PODMAN_SYSTEMD_UNIT=%n
 Restart=on-failure
 RestartSec=1s
 StartLimitBurst=5
-TimeoutStopSec=60
+TimeoutStopSec=70
 EnvironmentFile=/usr/etc/default/container-bind
 EnvironmentFile=-/etc/default/container-bind
 ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
