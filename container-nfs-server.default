@@ -11,5 +11,8 @@ EXPORTS_FILE="/etc/exports"
 # could be added as PODMAN_EXTRA_ARGS.
 EXPORTS_DIR="/exports"
 
+# Ports which needs to be exported
+NFS_SERVER_PORTS="-p 2049:2049"
+
 # Extra arguments for podman to start the container
 PODMAN_EXTRA_ARGS=""

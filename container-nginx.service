@@ -5,18 +5,21 @@ After=network-online.target local-fs.target firewalld.service
 Wants=network-online.target
 
 [Service]
-Restart=on-abnormal
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Restart=on-failure
+RestartSec=1s
+StartLimitBurst=5
+TimeoutStopSec=70
 EnvironmentFile=/usr/etc/default/container-nginx
 EnvironmentFile=-/etc/default/container-nginx
 ExecStartPre=-/usr/bin/mkdir -p ${NGINX_CFG} ${HTDOCS_DIR}
-ExecStartPre=-/usr/bin/podman stop nginx
-ExecStartPre=-/usr/bin/podman rm nginx
-ExecStartPre=-/usr/bin/podman pull ${NGINX_IMAGE_PATH}
-ExecStart=/bin/sh -c "/usr/bin/podman run -d --conmon-pidfile /%t/%n-pid --rm -v ${NGINX_CFG}:/etc/nginx -v ${HTDOCS_DIR}:/srv/www/htdocs -p 80:80/tcp -p 443:443/tcp --name nginx ${NGINX_IMAGE_PATH}"
-ExecStop=/usr/bin/podman stop nginx
-KillMode=none
+ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
+ExecStart=/bin/sh -c "/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile
+%t/%n.ctr-id --cgroups=no-conmon --replace -d --rm ${PODMAN_EXTRA_ARGS} -v ${NGINX_CFG}:/etc/nginx -v ${HTDOCS_DIR}:/srv/www/htdocs ${NGINX_PORTS} --name nginx ${NGINX_IMAGE_PATH}"
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n.ctr-id -t 10
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n.ctr-id
 Type=forking
-PIDFile=/%t/%n-pid
+PIDFile=%t/%n.pid
 
 [Install]
 WantedBy=multi-user.target

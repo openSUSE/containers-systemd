@@ -7,6 +7,8 @@ NGINX_IMAGE_PATH=registry.opensuse.org/opensuse/nginx:latest
 # Name of the path where the configuration is stored
 NGINX_CFG="/srv/nginx/etc"
 
-
 # Name of the path where the web pages are stored
 HTDOCS_DIR="/srv/nginx/htdocs"
+
+# Ports which needs to be exported
+NGINX_PORTS="-p 80:80/tcp -p 443:443/tcp"
