@@ -9,13 +9,13 @@ Environment=PODMAN_SYSTEMD_UNIT=%n
 Restart=on-failure
 RestartSec=1s
 StartLimitBurst=5
+TimeoutStopSec=60
 EnvironmentFile=/usr/etc/default/container-minidlna
 EnvironmentFile=-/etc/default/container-minidlna
 ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
 ExecStart=/bin/sh -c "/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --replace -d --rm ${PODMAN_EXTRA_ARGS} ${MINIDLNA_NET} -v ${MEDIA_DIR}:/media:Z ${MINIDLNA_ENV} -e DEBUG=${DEBUG} --name minidlna ${MINIDLNA_IMAGE_PATH} ${MINIDLNA_OPTS}"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n.ctr-id
-KillMode=none
 Type=forking
 PIDFile=%t/%n.pid
 
