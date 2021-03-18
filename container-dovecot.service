@@ -14,6 +14,7 @@ EnvironmentFile=/usr/etc/default/container-dovecot
 EnvironmentFile=-/etc/default/container-dovecot
 ExecStartPre=-/usr/bin/mkdir -p ${DOVECOT_CERTS_DIR} ${DOVECOT_VMAIL_DIR} ${EXTRA_PKI_DIR}
 ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
+ExecStartPre=-/usr/bin/podman pull ${DOVECOT_IMAGE_PATH}
 ExecStart=/bin/sh -c "/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --replace -d --rm ${PODMAN_EXTRA_ARGS} -v ${DOVECOT_VMAIL_DIR}:/var/spool/vmail:z -v ${DOVECOT_CERTS_DIR}:/etc/certs:z -v ${EXTRA_PKI_DIR}:/etc/pki:z -v ${SECRETS_DIR}:/etc/dovecot-secrets:Z ${DOVECOT_PORTS} -e USE_VMAIL_USER=${USE_VMAIL_USER} -e VMAIL_UID=${VMAIL_UID} -e USE_LDAP=${USE_LDAP} -e LDAP_HOSTS=${LDAP_HOSTS} -e LDAP_BASE_DN=${LDAP_BASE_DN} -e LDAP_BIND_DN=${LDAP_BIND_DN} -e LDAP_BIND_PASSWORD_FILE=${LDAP_BIND_PASSWORD_FILE} -e LDAP_USE_TLS=${LDAP_USE_TLS} -e DOVECOT_TLS_CRT=${DOVECOT_TLS_CRT} -e DOVECOT_TLS_KEY=${DOVECOT_TLS_KEY} -e DOVECOT_TLS_CA_CRT=${DOVECOT_TLS_CA_CRT} -e DOVECOT_TLS_CA_KEY=${DOVECOT_TLS_CA_KEY} -e ENABLE_IMAP=${ENABLE_IMAP} -e ENABLE_POP3=${ENABLE_POP3} -e ENABLE_LMTP=${ENABLE_LMTP} -e ENABLE_MANAGESIEVE=${ENABLE_MANAGESIEVE} -e DEBUG=${DEBUG} -e TZ=${TZ} --name dovecot ${DOVECOT_IMAGE_PATH}"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n.ctr-id

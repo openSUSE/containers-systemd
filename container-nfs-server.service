@@ -13,6 +13,7 @@ TimeoutStopSec=70
 EnvironmentFile=/usr/etc/default/container-nfs-server
 EnvironmentFile=-/etc/default/container-nfs-server
 ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
+ExecStartPre=-/usr/bin/podman pull ${NFS_SERVER_IMAGE_PATH}
 ExecStart=/bin/sh -c "/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --replace -d --rm ${PODMAN_EXTRA_ARGS} ${NFS_SERVER_PORTS} --privileged -v ${EXPORTS_FILE}:/etc/exports -v ${EXPORTS_DIR}:${EXPORTS_DIR} --name nfs-server ${NFS_SERVER_IMAGE_PATH}"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n.ctr-id

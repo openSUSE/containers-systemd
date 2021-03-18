@@ -14,6 +14,7 @@ EnvironmentFile=/usr/etc/default/container-mariadb
 EnvironmentFile=-/etc/default/container-mariadb
 ExecStartPre=-/usr/bin/mkdir -p ${DATA_DIR}
 ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
+ExecStartPre=-/usr/bin/podman pull ${MARIADB_IMAGE_PATH}
 ExecStart=/bin/sh -c "/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --replace -d --rm ${PODMAN_EXTRA_ARGS} -v ${DATA_DIR}:/var/lib/mysql -v ${SECRETS_DIR}:/etc/mariadb-secrets -p 3306:3306 --env MYSQL_ROOT_PASSWORD_FILE=/etc/mariadb-secrets/MYSQL_ROOT_PASSWORD --env MYSQL_ROOT_HOST_FILE=/etc/mariadb-secrets/MYSQL_ROOT_HOST --env MYSQL_DATABASE_FILE=/etc/mariadb-secrets/MYSQL_DATABASE --env MYSQL_USER_FILE=/etc/mariadb-secrets/MYSQL_USER --env MYSQL_PASSWORD_FILE=/etc/mariadb-secrets/MYSQL_PASSWORD --name mariadb ${MARIADB_IMAGE_PATH}"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n.ctr-id

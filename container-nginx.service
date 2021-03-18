@@ -14,6 +14,7 @@ EnvironmentFile=/usr/etc/default/container-nginx
 EnvironmentFile=-/etc/default/container-nginx
 ExecStartPre=-/usr/bin/mkdir -p ${NGINX_CFG} ${HTDOCS_DIR}
 ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
+ExecStartPre=-/usr/bin/podman pull ${NGINX_IMAGE_PATH}
 ExecStart=/bin/sh -c "/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --replace -d --rm ${PODMAN_EXTRA_ARGS} -v ${NGINX_CFG}:/etc/nginx -v ${HTDOCS_DIR}:/srv/www/htdocs ${NGINX_PORTS} --name nginx ${NGINX_IMAGE_PATH}"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n.ctr-id
