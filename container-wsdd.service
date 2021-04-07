@@ -1,0 +1,24 @@
+[Unit]
+Description=openSUSE wsdd container
+Documentation=https://en.opensuse.org/Portal:Container/Image/wsdd
+After=network-online.target local-fs.target firewalld.service
+Wants=network-online.target
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Restart=on-failure
+RestartSec=1s
+StartLimitBurst=5
+TimeoutStopSec=70
+EnvironmentFile=/usr/etc/default/container-wsdd
+EnvironmentFile=-/etc/default/container-wsdd
+ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
+ExecStartPre=-/usr/bin/podman pull ${WSDD_IMAGE_PATH}
+ExecStart=/bin/sh -c "/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --replace -d --rm ${PODMAN_EXTRA_ARGS} ${WSDD_NET} ${WSDD_ENV} -e DEBUG=${DEBUG} --name wsdd ${WSDD_IMAGE_PATH}"
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n.ctr-id -t 10
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n.ctr-id
+Type=forking
+PIDFile=%t/%n.pid
+
+[Install]
+WantedBy=multi-user.target
