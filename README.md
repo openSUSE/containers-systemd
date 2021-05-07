@@ -15,8 +15,10 @@ Currently supported are:
   * nginx
   * openldap
   * postfix
+  * samba
   * spamassassin
   * squid
+  * wsdd
 
 Additional, there is the `container-image-prune.timer` to cleanup
 unnamed images once a day. 

@@ -1,0 +1,22 @@
+# Variables of this file can be overwritten with
+# /etc/default/container-samba
+
+# Name of the image path to pull the samba image from
+SAMBA_IMAGE_PATH=registry.opensuse.org/opensuse/samba:latest
+
+# List of volumes to mount into the container
+# Example: "-v /home:/home -v /exports:/exports"
+SAMBA_VOLUMES=""
+
+# List of users to be created at container startup
+# -u <name:password>[:UID:group:GID]
+# Example: "-u admin:password:1021 -u user:pass2"
+SAMBA_USERS=""
+
+# List of shares to be exported by samba
+# -s <name:path>[:browse:readonly:guest:users:admins:writelist:comment]
+# Example for a public guest share: "-s mp3:/exports/mp3:yes:yes:yes"
+SAMBA_SHARES=""
+
+# Ports which needs to be exported
+SAMBA_PORTS="-p 139:139 -p 445:445"
