@@ -1,0 +1,26 @@
+# Variables of this file can be overwritten with
+# /etc/default/container-roundcube
+
+# Name of the image path to pull the roundcube image from
+ROUNDCUBE_IMAGE_PATH=roundcube/roundcubemail:latest
+
+# Name of the path where the db will be stored
+ROUNDCUBE_DB_DIR=/srv/roundcube/db
+
+# Name of the path where config.inc.php is stored
+ROUNDCUBE_CONFIG_DIR="/srv/roundcube"
+
+# Ports which needs to be exported
+ROUNDCUBE_PORTS="-p 80:80"
+
+# Roundcube mail configuration
+ROUNDCUBEMAIL_DEFAULT_HOST=tls://localhost
+ROUNDCUBEMAIL_SMTP_SERVER=tls://localhost
+ROUNDCUBEMAIL_PLUGINS=archive,zipdownload,newmail_notifier
+
+# Extra environment variables for Roundcube
+ROUNDCUBE_EXTRA_ENV=""
+
+# Extra arguments for podman to start the container
+# This can e.g. be the hostname: "--hostname <host.domain>"
+PODMAN_EXTRA_ARGS=""

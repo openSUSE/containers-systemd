@@ -15,6 +15,7 @@ Currently supported are:
   * nginx
   * openldap
   * postfix
+  * roundcube
   * samba
   * spamassassin
   * squid
@@ -81,6 +82,11 @@ unnamed images once a day.
 
   * /usr/etc/default/container-postfix contains generic settings
   * /etc/default/container-postfix is for the admin to overwrite them
+
+## roundcube
+
+  * /usr/etc/default/container-roundcube contains generic settings
+  * /etc/default/container-roundcube is for the admin to overwrite them
 
 ## spamassassin
 
