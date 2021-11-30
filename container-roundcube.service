@@ -15,11 +15,11 @@ EnvironmentFile=-/etc/default/container-roundcube
 ExecStartPre=-/usr/bin/mkdir -p ${ROUNDCUBE_DB_DIR} ${ROUNDCUBE_CONFIG_DIR}
 ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
 ExecStartPre=-/usr/bin/podman pull ${ROUNDCUBE_IMAGE_PATH}
-ExecStart=/bin/sh -c "/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --replace -d --rm ${PODMAN_EXTRA_ARGS} -v ${ROUNDCUBE_DB_DIR}:/var/roundcube/db:z -v ${ROUNDCUBE_CONFIG_DIR}/config.inc.php:/var/www/html/config/config.inc.php:z ${ROUNDCUBE_PORTS} -e ROUNDCUBEMAIL_DEFAULT_HOST=${ROUNDCUBEMAIL_DEFAULT_HOST} -e ROUNDCUBEMAIL_SMTP_SERVER=${ROUNDCUBEMAIL_SMTP_SERVER} -e ROUNDCUBEMAIL_PLUGINS=${ROUNDCUBEMAIL_PLUGINS} ${ROUNDCUBE_EXTRA_ENV} ${ROUNDCUBE_PORTS} --name roundcube ${ROUNDCUBE_IMAGE_PATH}"
+ExecStart=/bin/sh -c "/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --sdnotify=conmon --replace -d --rm ${PODMAN_EXTRA_ARGS} -v ${ROUNDCUBE_DB_DIR}:/var/roundcube/db:z -v ${ROUNDCUBE_CONFIG_DIR}/config.inc.php:/var/www/html/config/config.inc.php:z ${ROUNDCUBE_PORTS} -e ROUNDCUBEMAIL_DEFAULT_HOST=${ROUNDCUBEMAIL_DEFAULT_HOST} -e ROUNDCUBEMAIL_SMTP_SERVER=${ROUNDCUBEMAIL_SMTP_SERVER} -e ROUNDCUBEMAIL_PLUGINS=${ROUNDCUBEMAIL_PLUGINS} ${ROUNDCUBE_EXTRA_ENV} ${ROUNDCUBE_PORTS} --name roundcube ${ROUNDCUBE_IMAGE_PATH}"
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n.ctr-id
-Type=forking
-PIDFile=%t/%n.pid
+Type=notify
+NotifyAccess=all
 
 [Install]
 WantedBy=multi-user.target
