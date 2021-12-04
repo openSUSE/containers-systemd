@@ -1,5 +1,5 @@
 [Unit]
-Description=roundcoube container
+Description=roundcube container
 Documentation=https://github.com/roundcube/roundcubemail-docker/blob/master/README.md
 After=network-online.target local-fs.target firewalld.service
 Wants=network-online.target
