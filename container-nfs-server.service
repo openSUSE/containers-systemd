@@ -3,12 +3,13 @@ Description=openSUSE NFS Server container
 Documentation=https://en.opensuse.org/Portal:Container/Image/nfs-server
 After=network-online.target local-fs.target firewalld.service
 Wants=network-online.target
+StartLimitIntervalSec=40
+StartLimitBurst=5
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
 Restart=on-failure
 RestartSec=1s
-StartLimitBurst=5
 TimeoutStopSec=70
 EnvironmentFile=/usr/etc/default/container-nfs-server
 EnvironmentFile=-/etc/default/container-nfs-server

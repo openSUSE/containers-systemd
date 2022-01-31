@@ -3,12 +3,13 @@ Description=roundcube container
 Documentation=https://github.com/roundcube/roundcubemail-docker/blob/master/README.md
 After=network-online.target local-fs.target firewalld.service
 Wants=network-online.target
+StartLimitIntervalSec=40
+StartLimitBurst=5
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
 Restart=on-failure
 RestartSec=1s
-StartLimitBurst=5
 TimeoutStopSec=70
 EnvironmentFile=-/usr/etc/default/container-roundcube
 EnvironmentFile=-/etc/default/container-roundcube
