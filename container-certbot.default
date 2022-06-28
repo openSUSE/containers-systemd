@@ -1,0 +1,20 @@
+# Variables of this file can be overwritten with
+# /etc/default/container-certbot
+
+# Name of the image path to pull the wsdd image from
+CERTBOT_IMAGE_PATH=certbot/certbot:latest
+
+# Name of the path where the configuration will be stored
+CONFIG_DIR="/srv/certbot/etc"
+
+# Name of the path which certbot uses as /var/lib/certbot
+VAR_DIR="/srv/certbot/var"
+
+# Name of the path which certbot uses as /var/log/certbot
+LOG_DIR="/srv/certbot/log"
+
+# Ports which certbot webserver will use
+CERTBOT_PORTS="-p 80:80"
+
+# Extra arguments for podman to start the container
+PODMAN_EXTRA_ARGS=""

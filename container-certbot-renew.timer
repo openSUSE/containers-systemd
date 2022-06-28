@@ -1,0 +1,13 @@
+[Unit]
+Description=Timer to renew certificates with certbot container
+Documentation=https://eff-certbot.readthedocs.io/en/stable/install.html#running-with-docker
+After=local-fs.target
+
+[Timer]
+OnCalendar=daily
+AccuracySec=1m
+RandomizedDelaySec=2h
+Persistent=true
+
+[Install]
+WantedBy=timers.target
