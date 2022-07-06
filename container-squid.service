@@ -15,7 +15,7 @@ EnvironmentFile=/usr/etc/default/container-squid
 EnvironmentFile=-/etc/default/container-squid
 ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
 ExecStartPre=-/usr/bin/podman pull ${SQUID_IMAGE_PATH}
-ExecStart=/bin/sh -c "/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --sdnotify=conmon --replace -d --rm ${PODMAN_EXTRA_ARGS} ${PODMAN_SQUID_ARGS} --name squid ${SQUID_IMAGE_PATH}"
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --sdnotify=conmon --replace -d --rm $PODMAN_EXTRA_ARGS $PODMAN_SQUID_ARGS --name squid ${SQUID_IMAGE_PATH}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n.ctr-id
 Type=notify
