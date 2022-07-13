@@ -30,7 +30,7 @@ SECRETS_DIR="/etc/postfix-secrets"
 SMTP_PASSWORD_FILE="/etc/postfix-secrets/SMTP_PASSWORD"
 
 # Ports which needs to be exported
-POSTFIX_PORTS="-p 25:25 -p 587:587"
+POSTFIX_PORTS="-p 25:25 -p 465:465 -p 587:587"
 
 # Extra arguments for podman to start the container
 PODMAN_EXTRA_ARGS=""
@@ -40,6 +40,25 @@ VIRTUAL_MBOX=0
 
 # User/group ID of the user owning the virtual mailboxes
 VMAIL_UID=5000
+
+# Enable submission (port 587)
+ENABLE_SUBMISSION=0
+
+# Enable submissions/smtps (port 465). This requires SMTPD_USE_TLS=1
+ENABLE_SUBMISSIONS=0
+
+# Setup TLS/SSL for "submission" and "submissions".
+SMTPD_USE_TLS=1
+
+# Directory, where private and public certificate is stored.
+# Directory is mounted on /etc/postfix/ssl/certs
+POSTFIX_CERTS_DIR=/srv/postfix/certs
+
+# Public certificate 
+SMTPD_TLS_CRT=/etc/postfix/ssl/certs/fullchain.pem
+
+# Private certificate key
+SMTPD_TLS_KEY=/etc/postfix/ssl/certs/privkey.pem
 
 # If the virtual users are provided by LDAP 
 USE_LDAP=0
