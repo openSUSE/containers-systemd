@@ -1,0 +1,25 @@
+[Unit]
+Description=openSUSE cups server container
+Documentation=https://en.opensuse.org/Portal:Container/Image/cups
+After=network-online.target local-fs.target
+Wants=network-online.target
+StartLimitIntervalSec=40
+StartLimitBurst=5
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Restart=on-failure
+RestartSec=1s
+TimeoutStopSec=70
+EnvironmentFile=/usr/etc/default/container-cups
+EnvironmentFile=-/etc/default/container-cups
+ExecStartPre=/bin/rm -f %t/%n.pid %t/%n.ctr-id
+ExecStartPre=-/usr/bin/podman pull ${CUPS_IMAGE_PATH}
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/%n.pid --cidfile %t/%n.ctr-id --cgroups=no-conmon --sdnotify=conmon --replace -d --rm $PODMAN_EXTRA_ARGS -p 631:631 -e ADMIN_PASSWORD=${CUPS_ADMIN_PASSWORD} --name cups ${CUPS_IMAGE_PATH}
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/%n.ctr-id -t 10
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/%n.ctr-id
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target

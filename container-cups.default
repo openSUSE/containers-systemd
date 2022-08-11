@@ -1,0 +1,13 @@
+# Variables of this file can be overwritten with
+# /etc/default/container-cups
+
+# Name of the image path to pull the cups image from
+CUPS_IMAGE_PATH=registry.opensuse.org/opensuse/cups:latest
+
+# Password for the admin account to login and adjust printer configuration
+CUPS_ADMIN_PASSWORD=""
+
+# Extra arguments for podman to start the container
+# Possible additional entries (multiple are possible):
+# "-v /srv/cups:/etc/cups"
+PODMAN_EXTRA_ARGS=""
