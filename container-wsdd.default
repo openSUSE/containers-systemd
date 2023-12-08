@@ -8,7 +8,7 @@ WSDD_IMAGE_PATH=registry.opensuse.org/opensuse/wsdd:latest
 WSDD_NET="--net=host"
 
 # Environment variables to configure wsdd
-WSDD_ENV="-e HOSTNAME=$(hostname)"
+WSDD_ENV=""
 
 # Extra arguments for podman to start the container
 PODMAN_EXTRA_ARGS=""
